@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'config/routes/app_router.dart';
+import 'config/routes/routes.dart';
+
 void main() {
   runApp(const FoodPicker());
 }
@@ -9,12 +12,11 @@ class FoodPicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: Routes.initial,
+      onGenerateRoute: AppRouter.generateRoute,
       title: 'Food Picker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Container(),
     );
   }
 }
