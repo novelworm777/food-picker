@@ -10,7 +10,7 @@ class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.chooseFoodVendorScreen:
-        return MaterialPageRoute(builder: (_) => ChooseFoodVendorScreen());
+        return MaterialPageRoute(builder: (_) => ChooseVendorPickerScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

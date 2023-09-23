@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:food_picker/modules/models/vendor_picker_choice.dart';
 
-class ChooseFoodVendorScreen extends StatelessWidget {
-  ChooseFoodVendorScreen({super.key});
+import '../../utils/services/local_storage_service.dart';
+import '../models/vendor_picker_choice.dart';
 
-  final _vendor_choices = ['BCA', 'BSD'];
+class ChooseVendorPickerScreen extends StatefulWidget {
+  const ChooseVendorPickerScreen({super.key});
+
+  @override
+  State<ChooseVendorPickerScreen> createState() =>
+      _ChooseVendorPickerScreenState();
+}
+
+class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
+  final _local = LocalStorageService();
+  List<String> _vendorPickers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _getVendorPickers();
+  }
+
+  Future<void> _getVendorPickers() async {
+    setState(() async {
+      _vendorPickers = await _local.getVendorPickers();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +41,9 @@ class ChooseFoodVendorScreen extends StatelessWidget {
           child: Center(
             child: ListView.separated(
               itemBuilder: (BuildContext context, int index) {
-                return VendorPickerChoice(text: _vendor_choices[index]);
+                return VendorPickerChoice(text: _vendorPickers[index]);
               },
-              itemCount: _vendor_choices.length,
+              itemCount: _vendorPickers.length,
               separatorBuilder: (BuildContext context, int index) =>
                   const SizedBox(height: 37.0),
               shrinkWrap: true,
