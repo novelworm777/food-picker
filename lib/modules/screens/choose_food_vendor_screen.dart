@@ -24,8 +24,9 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
   }
 
   Future<void> _getVendorPickers() async {
+    final res = await _local.getVendorPickers();
     setState(() async {
-      _vendorPickers = await _local.getVendorPickers();
+      _vendorPickers = res;
     });
   }
 
@@ -59,6 +60,7 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
               backgroundColor: const Color(0xFFBDBDBD),
               builder: (context) => SettingsBottomModal(
                 addVendorPicker: _addVendorPicker,
+                removeVendorPicker: _removeVendorPicker,
               ),
             ),
             child: const Icon(
@@ -74,6 +76,15 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
 
   Future<void> _addVendorPicker(String pickerName) async {
     await _local.addVendorPicker(pickerName);
-    _vendorPickers.add(pickerName);
+    setState(() {
+      _vendorPickers.add(pickerName);
+    });
+  }
+
+  Future<void> _removeVendorPicker(String pickerName) async {
+    await _local.removeVendorPicker(pickerName);
+    setState(() {
+      _vendorPickers.remove(pickerName);
+    });
   }
 }

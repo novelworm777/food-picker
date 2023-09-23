@@ -18,7 +18,7 @@ class AddVendorPickerBottomModal extends StatefulWidget {
 
 class _AddVendorPickerBottomModalState
     extends State<AddVendorPickerBottomModal> {
-  String _newPickerName = "";
+  String _pickerName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _AddVendorPickerBottomModalState
             labelText: 'Vendor Name',
             onChanged: (value) {
               setState(() {
-                _newPickerName = value;
+                _pickerName = value;
               });
             },
           ),
@@ -44,7 +44,7 @@ class _AddVendorPickerBottomModalState
               ),
             ),
             onPressed: () {
-              widget.addVendorPicker(_newPickerName);
+              widget.addVendorPicker(_pickerName);
               Navigator.pop(context);
             },
             child: Text(
