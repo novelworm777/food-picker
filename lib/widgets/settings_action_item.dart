@@ -20,7 +20,11 @@ class SettingsActionItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => showBarModalBottomSheet(
         context: context,
-        builder: (context) => bottomModal,
+        builder: (context) => Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: bottomModal,
+        ),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
