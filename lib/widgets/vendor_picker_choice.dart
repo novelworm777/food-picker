@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+/// Vendor picker list tile.
 class VendorPickerChoice extends StatelessWidget {
   const VendorPickerChoice({
     Key? key,
