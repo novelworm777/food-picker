@@ -3,25 +3,26 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/services/local_storage_service.dart';
 import 'app_drop_down.dart';
+import 'app_text_field.dart';
 
-class RemoveVendorPickerBottomModal extends StatefulWidget {
-  const RemoveVendorPickerBottomModal({
+class AddFoodVendorBottomModal extends StatefulWidget {
+  const AddFoodVendorBottomModal({
     super.key,
-    required this.removeVendorPicker,
+    required this.addFoodVendor,
   });
 
-  final void Function(String) removeVendorPicker;
+  final void Function(String, String) addFoodVendor;
 
   @override
-  State<RemoveVendorPickerBottomModal> createState() =>
-      _RemoveVendorPickerBottomModalState();
+  State<AddFoodVendorBottomModal> createState() =>
+      _AddFoodVendorBottomModalState();
 }
 
-class _RemoveVendorPickerBottomModalState
-    extends State<RemoveVendorPickerBottomModal> {
+class _AddFoodVendorBottomModalState extends State<AddFoodVendorBottomModal> {
   final _local = LocalStorageService();
   List<String> _vendorPickers = [];
   String _pickerName = "";
+  String _vendorName = "";
 
   @override
   void initState() {
@@ -59,6 +60,14 @@ class _RemoveVendorPickerBottomModalState
               },
               value: _pickerName,
             ),
+            AppTextField(
+              labelText: 'Vendor Name',
+              onChanged: (value) {
+                setState(() {
+                  _vendorName = value;
+                });
+              },
+            ),
             const SizedBox(height: 13.0),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
@@ -68,11 +77,11 @@ class _RemoveVendorPickerBottomModalState
                 ),
               ),
               onPressed: () {
-                widget.removeVendorPicker(_pickerName);
+                widget.addFoodVendor(_pickerName, _vendorName);
                 Navigator.pop(context);
               },
               child: Text(
-                'Delete',
+                'Create',
                 style: GoogleFonts.jetBrainsMono(
                   color: const Color(0xFFFFFFFF),
                   fontSize: 17.0,

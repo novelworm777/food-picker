@@ -16,6 +16,7 @@ class ChooseVendorPickerScreen extends StatefulWidget {
 class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
   final _local = LocalStorageService();
   List<String> _vendorPickers = [];
+  final Map<String, List<String>> _foodVendors = {};
 
   @override
   void initState() {
@@ -23,10 +24,13 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
     _getVendorPickers();
   }
 
-  Future<void> _getVendorPickers() async {
+  void _getVendorPickers() async {
     final res = await _local.getVendorPickers();
     setState(() async {
       _vendorPickers = res;
+      for (String pickerName in _vendorPickers) {
+        _foodVendors[pickerName] = [];
+      }
     });
   }
 
@@ -61,6 +65,7 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
               builder: (context) => SettingsBottomModal(
                 addVendorPicker: _addVendorPicker,
                 removeVendorPicker: _removeVendorPicker,
+                addFoodVendor: _addFoodVendor,
               ),
             ),
             child: const Icon(
@@ -74,17 +79,24 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
     );
   }
 
-  Future<void> _addVendorPicker(String pickerName) async {
+  void _addVendorPicker(String pickerName) async {
     await _local.addVendorPicker(pickerName);
     setState(() {
       _vendorPickers.add(pickerName);
     });
   }
 
-  Future<void> _removeVendorPicker(String pickerName) async {
+  void _removeVendorPicker(String pickerName) async {
     await _local.removeVendorPicker(pickerName);
     setState(() {
       _vendorPickers.remove(pickerName);
+    });
+  }
+
+  void _addFoodVendor(String pickerName, String vendorName) async {
+    await _local.addFoodVendor(pickerName, vendorName);
+    setState(() {
+      _foodVendors[pickerName]?.add(vendorName);
     });
   }
 }

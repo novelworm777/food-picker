@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_picker/widgets/add_food_vendor_bottom_modal.dart';
 import 'package:food_picker/widgets/add_vendor_picker_bottom_modal.dart';
 import 'package:food_picker/widgets/remove_vendor_picker_bottom_modal.dart';
 import 'package:food_picker/widgets/settings_action_item.dart';
@@ -9,10 +10,12 @@ class SettingsBottomModal extends StatelessWidget {
     Key? key,
     required this.addVendorPicker,
     required this.removeVendorPicker,
+    required this.addFoodVendor,
   }) : super(key: key);
 
   final void Function(String) addVendorPicker;
   final void Function(String) removeVendorPicker;
+  final void Function(String, String) addFoodVendor;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,9 @@ class SettingsBottomModal extends StatelessWidget {
           ),
           const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
           SettingsActionItem(
-            bottomModal: SizedBox(height: 300),
+            bottomModal: AddFoodVendorBottomModal(
+              addFoodVendor: addFoodVendor,
+            ),
             iconData: Icons.add_circle_rounded,
             text: 'Add food vendor',
           ),
