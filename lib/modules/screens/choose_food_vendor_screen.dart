@@ -21,16 +21,27 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
   @override
   void initState() {
     super.initState();
-    _getVendorPickers();
+    _getLocalData();
   }
 
-  void _getVendorPickers() async {
+  void _getLocalData() async {
+    await _getVendorPickers();
+    for (String pickerName in _vendorPickers) {
+      await _getFoodVendors(pickerName);
+    }
+  }
+
+  Future<void> _getVendorPickers() async {
     final res = await _local.getVendorPickers();
-    setState(() async {
+    setState(() {
       _vendorPickers = res;
-      for (String pickerName in _vendorPickers) {
-        _foodVendors[pickerName] = [];
-      }
+    });
+  }
+
+  Future<void> _getFoodVendors(String pickerName) async {
+    final res = await _local.getFoodVendors(pickerName);
+    setState(() {
+      _foodVendors[pickerName] = res;
     });
   }
 
@@ -66,6 +77,7 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
                 addVendorPicker: _addVendorPicker,
                 removeVendorPicker: _removeVendorPicker,
                 addFoodVendor: _addFoodVendor,
+                removeFoodVendor: _removeFoodVendors,
               ),
             ),
             child: const Icon(
@@ -97,6 +109,13 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
     await _local.addFoodVendor(pickerName, vendorName);
     setState(() {
       _foodVendors[pickerName]?.add(vendorName);
+    });
+  }
+
+  void _removeFoodVendors(String pickerName, String vendorName) async {
+    await _local.removeFoodVendor(pickerName, vendorName);
+    setState(() {
+      _foodVendors[pickerName]?.remove(vendorName);
     });
   }
 }

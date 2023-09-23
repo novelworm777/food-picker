@@ -56,7 +56,7 @@ class LocalStorageService {
     // remove from vendors data
     final vendorsKey = '${pickerName}_vendors';
     final List<String> pickers = (prefs.getStringList(vendorsKey) ?? [])
-      ..remove(pickerName);
+      ..remove(vendorName);
     await prefs.setStringList(vendorsKey, pickers);
     // remove all choices data of vendor
     final choicesKey = '${vendorName}_choices';
