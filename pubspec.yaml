@@ -1,6 +1,6 @@
 name: food_picker
 description: App to randomly pick what food to eat.
-version: 1.0.0+1
+version: 1.0.0+16
 
 environment:
   sdk: '>=2.18.2 <3.0.0'
