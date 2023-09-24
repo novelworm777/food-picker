@@ -22,56 +22,54 @@ class SettingsBottomModal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 321,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          SettingsActionItem(
-            bottomModal: AddVendorPickerBottomModal(
-              addVendorPicker: addVendorPicker,
-            ),
-            iconData: Icons.add_circle_rounded,
-            text: 'Add vendor picker',
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SettingsActionItem(
+          bottomModal: AddVendorPickerBottomModal(
+            addVendorPicker: addVendorPicker,
           ),
-          const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
-          SettingsActionItem(
-            bottomModal: RemoveVendorPickerBottomModal(
-              removeVendorPicker: removeVendorPicker,
-            ),
-            iconData: Icons.remove_circle_rounded,
-            text: 'Remove vendor picker',
+          iconData: Icons.add_circle_rounded,
+          text: 'Add vendor picker',
+        ),
+        const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
+        SettingsActionItem(
+          bottomModal: RemoveVendorPickerBottomModal(
+            removeVendorPicker: removeVendorPicker,
           ),
-          const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
-          SettingsActionItem(
-            bottomModal: AddFoodVendorBottomModal(
-              addFoodVendor: addFoodVendor,
-            ),
-            iconData: Icons.add_circle_rounded,
-            text: 'Add food vendor',
+          iconData: Icons.remove_circle_rounded,
+          text: 'Remove vendor picker',
+        ),
+        const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
+        SettingsActionItem(
+          bottomModal: AddFoodVendorBottomModal(
+            addFoodVendor: addFoodVendor,
           ),
-          const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
-          SettingsActionItem(
-            bottomModal: RemoveFoodVendorBottomModal(
-              removeFoodVendor: removeFoodVendor,
-            ),
-            iconData: Icons.remove_circle_rounded,
-            text: 'Remove food vendor',
+          iconData: Icons.add_circle_rounded,
+          text: 'Add food vendor',
+        ),
+        const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
+        SettingsActionItem(
+          bottomModal: RemoveFoodVendorBottomModal(
+            removeFoodVendor: removeFoodVendor,
           ),
-          const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
-          SettingsActionItem(
-            bottomModal: SizedBox(height: 300),
-            iconData: Icons.add_circle_rounded,
-            text: 'Add food choice',
-          ),
-          const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
-          SettingsActionItem(
-            bottomModal: SizedBox(height: 300),
-            iconData: Icons.remove_circle_rounded,
-            text: 'Remove food choice',
-          ),
-        ],
-      ),
+          iconData: Icons.remove_circle_rounded,
+          text: 'Remove food vendor',
+        ),
+        const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
+        SettingsActionItem(
+          bottomModal: SizedBox(height: 300),
+          iconData: Icons.add_circle_rounded,
+          text: 'Add food choice',
+        ),
+        const Divider(height: 3.0, color: Color(0xFFFFFFFF), thickness: 0.7),
+        SettingsActionItem(
+          bottomModal: SizedBox(height: 300),
+          iconData: Icons.remove_circle_rounded,
+          text: 'Remove food choice',
+        ),
+      ],
     );
   }
 }

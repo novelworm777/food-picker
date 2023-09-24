@@ -1,4 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:food_picker/widgets/food_vendor_bottom_modal.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../utils/services/local_storage_service.dart';
@@ -60,7 +63,24 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
             child: Center(
               child: ListView.separated(
                 itemBuilder: (BuildContext context, int index) {
-                  return VendorPickerChoice(text: _vendorPickers[index]);
+                  final pickerName = _vendorPickers[index];
+                  return VendorPickerChoice(
+                    onTap: () {
+                      final foodVendors = _foodVendors[pickerName] ?? [];
+                      if (foodVendors.isNotEmpty) {
+                        final random = Random().nextInt(foodVendors.length);
+                        final vendorName = foodVendors[random];
+                        showBarModalBottomSheet(
+                          context: context,
+                          builder: (context) => FoodVendorBottomModal(
+                            vendorName: vendorName,
+                          ),
+                          expand: true,
+                        );
+                      }
+                    },
+                    text: pickerName,
+                  );
                 },
                 itemCount: _vendorPickers.length,
                 separatorBuilder: (BuildContext context, int index) =>
@@ -71,8 +91,8 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
           ),
           floatingActionButton: GestureDetector(
             onTap: () => showBarModalBottomSheet(
-              context: context,
               backgroundColor: const Color(0xFFBDBDBD),
+              context: context,
               builder: (context) => SettingsBottomModal(
                 addVendorPicker: _addVendorPicker,
                 removeVendorPicker: _removeVendorPicker,
