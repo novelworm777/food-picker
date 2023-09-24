@@ -65,14 +65,16 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
                 itemBuilder: (BuildContext context, int index) {
                   final pickerName = _vendorPickers[index];
                   return VendorPickerChoice(
-                    onTap: () {
+                    onTap: () async {
                       final foodVendors = _foodVendors[pickerName] ?? [];
                       if (foodVendors.isNotEmpty) {
                         final random = Random().nextInt(foodVendors.length);
                         final vendorName = foodVendors[random];
+                        final res = await _local.getFoodChoices(vendorName);
                         showBarModalBottomSheet(
                           context: context,
                           builder: (context) => FoodVendorBottomModal(
+                            foodChoices: res,
                             vendorName: vendorName,
                           ),
                           expand: true,
@@ -97,7 +99,8 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
                 addVendorPicker: _addVendorPicker,
                 removeVendorPicker: _removeVendorPicker,
                 addFoodVendor: _addFoodVendor,
-                removeFoodVendor: _removeFoodVendors,
+                removeFoodVendor: _removeFoodVendor,
+                addFoodChoice: _addFoodChoice,
               ),
             ),
             child: const Icon(
@@ -132,10 +135,14 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
     });
   }
 
-  void _removeFoodVendors(String pickerName, String vendorName) async {
+  void _removeFoodVendor(String pickerName, String vendorName) async {
     await _local.removeFoodVendor(pickerName, vendorName);
     setState(() {
       _foodVendors[pickerName]?.remove(vendorName);
     });
+  }
+
+  void _addFoodChoice(String vendorName, String foodName) async {
+    await _local.addFoodChoice(vendorName, foodName);
   }
 }

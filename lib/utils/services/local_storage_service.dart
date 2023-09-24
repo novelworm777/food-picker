@@ -64,11 +64,11 @@ class LocalStorageService {
   }
 
   /// Add new food choice of a food vendor.
-  Future<void> addFoodChoice(String vendorName, String choiceName) async {
+  Future<void> addFoodChoice(String vendorName, String foodName) async {
     final prefs = await SharedPreferences.getInstance();
     final choicesKey = '${vendorName}_choices';
     final List<String> choices = (prefs.getStringList(choicesKey) ?? [])
-      ..add(choiceName);
+      ..add(foodName);
     await prefs.setStringList(choicesKey, choices);
   }
 
@@ -80,11 +80,11 @@ class LocalStorageService {
   }
 
   /// Remove a food choice of a food vendor.
-  Future<void> removeFoodChoice(String vendorName, String choiceName) async {
+  Future<void> removeFoodChoice(String vendorName, String foodName) async {
     final prefs = await SharedPreferences.getInstance();
     final choicesKey = '${vendorName}_choices';
     final List<String> choices = (prefs.getStringList(choicesKey) ?? [])
-      ..remove(choiceName);
+      ..remove(foodName);
     await prefs.setStringList(choicesKey, choices);
   }
 }
