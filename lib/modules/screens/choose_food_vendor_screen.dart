@@ -101,6 +101,7 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
                 addFoodVendor: _addFoodVendor,
                 removeFoodVendor: _removeFoodVendor,
                 addFoodChoice: _addFoodChoice,
+                removeFoodChoice: _removeFoodChoice,
               ),
             ),
             child: const Icon(
@@ -144,5 +145,9 @@ class _ChooseVendorPickerScreenState extends State<ChooseVendorPickerScreen> {
 
   void _addFoodChoice(String vendorName, String foodName) async {
     await _local.addFoodChoice(vendorName, foodName);
+  }
+
+  void _removeFoodChoice(String vendorName, String foodName) async {
+    await _local.removeFoodChoice(vendorName, foodName);
   }
 }

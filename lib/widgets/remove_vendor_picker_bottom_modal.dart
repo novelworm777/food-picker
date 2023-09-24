@@ -33,7 +33,7 @@ class _RemoveVendorPickerBottomModalState
     final res = await _local.getVendorPickers();
     setState(() {
       _vendorPickers = res;
-      _pickerName = _vendorPickers.first;
+      _pickerName = _vendorPickers.isNotEmpty ? _vendorPickers.first : "";
     });
   }
 

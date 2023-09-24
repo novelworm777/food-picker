@@ -40,7 +40,7 @@ class _RemoveFoodVendorBottomModalState
     final res = await _local.getVendorPickers();
     setState(() {
       _vendorPickers = res;
-      _pickerName = _vendorPickers.first;
+      _pickerName = _vendorPickers.isNotEmpty ? _vendorPickers.first : "";
     });
   }
 
@@ -48,7 +48,7 @@ class _RemoveFoodVendorBottomModalState
     final res = await _local.getFoodVendors(_pickerName);
     setState(() {
       _foodVendors = res;
-      _vendorName = _foodVendors.first;
+      _vendorName = _foodVendors.isNotEmpty ? _foodVendors.first : "";
     });
   }
 
@@ -99,7 +99,7 @@ class _RemoveFoodVendorBottomModalState
                 Navigator.pop(context);
               },
               child: Text(
-                'Remove',
+                'Delete',
                 style: GoogleFonts.jetBrainsMono(
                   color: const Color(0xFFFFFFFF),
                   fontSize: 17.0,
